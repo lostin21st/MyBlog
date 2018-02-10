@@ -1,0 +1,30 @@
+{% extends 'admin/model/edit.html' %}
+{%  block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static',filename='css/editormd.min.css',_external=True)}}">
+{% endblock %}
+{% block tail %}
+{{ super() }}
+<script src="{{ url_for('static',filename='js/editormd.min.js')}}"></script>
+<script>
+$(function(){
+	$("textarea").parent().attr("id","test-editormd");
+	$("#body_html").parent().parent().parent().attr("style","display:none");
+	});
+$(function(){
+	testEditor=editormd("test-editormd",{
+		height:'400px',
+		syncScrolling:"single",
+		path:"{{url_for('static',filename='editormd/lib/')}}",
+		saveHTMLToTextarea : true,
+		imageUpload:true,
+		imageFormats:["jpg","jpeg","gif","png","bmp","webp"],
+		imageUploadURL:"{{ url_for('main.upload') }}"
+	});
+});
+$(function(){
+	$(".editormd-html-textarea").attr("name","body_html");
+})
+</script>
+{% endblock %}
+

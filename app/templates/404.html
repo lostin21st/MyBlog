@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block head %}
+{{ super() }}
+<link href="//fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+<style>
+.container {
+	text-align: center;
+	display:table-cell;
+	vertical-align: middle;
+}
+.content{
+	text-align: center;
+	display: inline-block;
+}
+.title{
+	font-size: 72px;
+	margin-top: 80px;
+	font-family: 'Lato';
+}
+</style>
+{% endblock head %}
+{% block main %}
+<div class="container">
+	<div class="content">
+		<div class="title">404 NOT FOUND</div>
+	</div>
+</div>
+{% endblock main %}

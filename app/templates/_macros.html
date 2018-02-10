@@ -1,0 +1,17 @@
+{% macro pagination_widget(pagination, endpoint) %}
+<nav class="pagina">
+	<a class="{% if not pagination.has_prev %}disabled{% else %} prev{% endif %}" href="{% if pagination.has_prev %}{{ url_for(endpoint,page=pagination.page-1)}}{% else %}#{% endif %}"><i class="fa fa-angle-left"></i></a>
+	{% for p in pagination.iter_pages() %}
+		{% if p %}
+			{% if p == pagination.page %}
+			<span class="page-number current">{{ pagination.page }}</span>
+			{% else %}
+			<a class="page-number" href="{{ url_for(endpoint,page = p) }}">{{ p }}</a>
+			{% endif %}
+		{% else %}
+		<span class="space">...</span>
+		{% endif %}
+	{% endfor %}
+	<a class="{% if not pagination.has_next %}disabled{% else %}next{% endif %}" href="{% if pagination.has_next %}{{ url_for(endpoint,page=pagination.page+1)}}{% else %}#{% endif %}"><i class="fa fa-angle-right"></i></a>
+</nav>
+{% endmacro %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% import "_macros.html" as macros %}
+{% block main %}
+<div class="posts-block archive">
+	<div class="posts-collapse">
+		<span class="archive-move-on"></span>
+		<span class="archive-page-counter">目前共计{{ count }}篇日志。</span>
+		{% for post in posts %}
+			<div class="collection-title">
+				<h2 class="archive-year">{{ post[0] }}</h2>
+			</div>
+			{% for article in post[1] %}
+			<article class="post">
+				<header class="post-header">
+					<h3 class="post-title">
+						<a class="post-title-link" href="{{ url_for('.post', id=article.id) }}">
+							<span>{{ article.title }}</span>
+						</a>
+					</h3>
+					<div class="post-meta">
+						<time class="post-time">{{ moment(article.create_date).format("MM-DD") }}</time>
+					</div>
+				</header>
+			</article>
+			{% endfor %}
+		{% endfor %}
+	</div>
+</div>
+{{ macros.pagination_widget(pagination, '.archives') }}
+{% endblock %}

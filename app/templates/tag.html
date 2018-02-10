@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block main %}
+<div class="posts-block">
+<div class="posts-collapse">
+	<div class="collection-title">
+		<h2>{{ tag.name }}<small>标签</small></h2>
+	</div>
+	{% if posts %}
+	{% for post in posts %}
+	<article class="post">
+		<header class="post-header">
+			<h3 class="post-title">
+				<a href="{{ url_for('.post',id=post.id) }}">
+					<span>{{ post.title }}</span>
+				</a>
+			</h3>
+			<div class="post-meta">
+				<time class="post-time" title="创建于">{{ moment(post.create_date).format("YY-MM-DD") }}</time>
+			</div>
+		</header>
+	</article>
+	{% endfor %}
+	{% endif %}
+</div>
+</div>
+{% endblock main %}

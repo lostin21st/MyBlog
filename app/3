@@ -1,0 +1,245 @@
+{% extends 'bootstrap/base.html' %}
+{% block head %}
+{{ super() }}
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+<link href={{ url_for('static', filename='css/editormd.min.css', _external=True) }} rel="stylesheet">
+<link href={{ url_for('static', filename='css/style.css', _external=True) }} rel="stylesheet">
+<link href={{ url_for('static', filename='css/font-awesome.min.css', _external=True) }} rel="stylesheet">
+
+{% endblock head %}
+{% block title %}MyBlog{% endblock %}
+{% block body %}
+{% block navbar%}
+<div class="box">
+	<div class="header">
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav-collapse #test">
+				<span class="sr-only">切换导航</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+		</button>
+		<div class="logo">
+			<a href="#"><image src="../static/image/logo.png"></a>
+		</div>
+		<nav class="site-nav collapse navbar-collapse" id="nav-collapse">
+			<ul class="menu collapse navbar-collapse" id="test">
+				<li class="menu-item">
+					<a href="{{ url_for('main.index') }}" rel="section">
+						<i class="fa fa-fw fa-home"></i>
+						<p>
+
+						</p>
+						首页
+					</a>
+				</li>
+				<li class="menu-item">
+					<a href="{{ url_for('main.tags') }}" rel="section">
+						<i class="fa fa-fw fa-tags"></i>
+						<p>
+
+						</p>
+						标签
+					</a>
+				</li>
+				<li class="menu-item">
+					<a href="{{ url_for('main.archives') }}" rel="section">
+						<i class="fa fa-fw fa-archive"></i>
+						<p>
+
+						</p>
+						归档
+					</a>
+				</li>
+				<li class="menu-item">
+					<a href="#" rel="section">
+						<i class="fa fa-fw fa-user"></i>
+						<p>
+
+						</p>
+						关于
+					</a>
+				</li>
+
+			</ul>
+		</nav>
+	</div>
+
+{% endblock navbar %}
+
+<div id="wrapper">
+	{% block siderbar %}
+	<div class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+		<div class="sidebar-inner">
+			<div class="site-author motion-element">
+				<img class="site-author-image" src={{ url_for('static',filename='image/avatar.jpg', _external='True') }}>
+				<p class="site-author-name">Max</p>
+				<p class="site-description motion-element"></p>
+			</div>
+			<nav class="site-state motion-element">
+				<div class="site-state-item">
+					<a href="{{ url_for('main.archives') }}">
+						<span class="site-state-item-count">{{ g.posts_count }}</span>
+						<span class="site-state-item-name">日志</span>
+					</a>
+				</div>
+				<div class="site-state-item">
+					<span class="site-state-item-count">0</span>
+					<span class="site-state-item-name">分类</span>
+				</div>
+				<div class="site-state-item">
+					<a href="{{ url_for('main.tags') }}">
+						<span class="site-state-item-count">{{ g.tags_count }}</span>
+						<span class="site-state-item-name">标签</span>
+					</a>
+				</div>
+			</nav>
+			<div class="links-of-author motion-element">
+					<a href="#" target="_blank" title="GitHub">
+						<i class="fa fa-fw fa-github"></i>
+						GitHub
+					</a>
+			</div>
+		</div>
+		<button type="button" class="hamburger is-closed animated fadeInLeft" data-toggle="offcanvas">
+			<span class="hamb-top"></span>
+			<span class="hamb-middle"></span>
+			<span class="hamb-bottom"></span>
+		</button>
+	</div>
+	{% endblock siderbar %}
+</div>
+
+<div  class="main">
+	<div class="main-inner">
+		{% block main%}
+		{% endblock main%}
+	</div>
+</div>
+<footer class="footer">
+	<div class="footer-inner">
+		<div class="copyright">© 
+			<span class="with-love"><i class="fa fa-user"></i></span>
+			<span>2018</span>
+			<span class="author">Max</span>
+		</div>
+	</div>
+</footer>
+</div>
+{% block scripts %}
+{{ super() }}
+{{ moment.include_moment() }}
+<script src={{ url_for('static',filename='js/three.min.js',_external=True) }}></script>
+<script src={{ url_for('static',filename='js/canvas_lines.min.js', _external=True) }}></script>
+<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>
+<script src={{ url_for('static',filename='js/prettify.min.js',_external=True) }}></script>
+<script src={{ url_for('static',filename='js/topbar.js',_external=True) }}></script>
+<script src={{ url_for('static',filename='js/velocity.min.js', _external=True) }}></script>
+<script src={{ url_for('static',filename='js/velocity.ui.min.js', _external=True) }}></script>
+<!--[if lt IE 9]>
+<script src="http://www.jq22.com/jquery/html5.min.js"></script>
+<![endif]-->
+<script>
+$(function() {
+	prettyPrint()
+		function resetToDefaults(){
+			topbar.config({
+				autoRun: true,
+				barThickness: 3,
+				barColors:{
+					'0': 'rgba(26,  188, 156, .9)',
+					'.25': 'rgba(52,  152, 219, .9)',
+					'.50': 'rgba(241, 196, 15,  .9)',
+					'.75': 'rgba(230, 126, 34,  .9)',
+					'1.0': 'rgba(211, 84,  0,   .9)'
+				},
+				shadowBlur: 10,
+				shadowColor: 'rgba(0,   0,   0,   .6)'
+			})
+		}
+	resetToDefaults();
+	topbar.show();
+	setTimeout(function(){
+		$('#main_content').fadeIn('slow');
+		topbar.hide();
+	}, 1500)
+	$('#btnStartAdvanced').click(function() {
+		resetToDefaults();
+		topbar.show();
+		(function step() {
+			setTimeout(function() {
+				if (topbar.progress('+.01') < 1) step()
+			},16)
+		})()
+	})
+	$('#btnStopAdvanced').click(function() {
+		topbar.hide()
+	})
+})
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+	var trigger = $('.hamburger'),
+			isClosed = false;
+	trigger.click(function() {
+		hamburger_cross();
+	});
+	function hamburger_cross() {
+		if (isClosed == true){
+			trigger.removeClass('is-open');
+			trigger.addClass('is-closed');
+			isClosed = false;
+			$('.motion-element').velocity('stop').css('display', 'none');
+		} else {
+			trigger.removeClass('is-closed');
+			trigger.addClass('is-open');
+			$('.motion-element').velocity(
+					'transition.slideLeftIn',
+					{
+						stagger: 150,
+						drag: true
+					})
+			isClosed = true;
+		}
+	}
+	$('[data-toggle="offcanvas"]').click(function() {
+		$('#wrapper').toggleClass('toggled');
+		$('body').toggleClass('btg');
+	});
+})
+</script>
+<script>
+$(document).ready(function(){
+	var sequence = [];
+	sequence.push({
+		e: $('.logo'),
+		p: {opacity:1},
+		o: {duration:200}
+	});
+	sequence.push({
+		$('.menu-item').velocity('transition.slideDownIn',
+				{duration:200}
+				)
+	})
+	$.Velocity.RunSequence(sequence);
+	/*$('.logo').velocity({opacity:1},200);
+	$('.menu-item').velocity('transition.slideDownIn',{
+		display:null,
+		duration: 200
+	});
+	*/
+})
+</script>
+<script>
+$(function (){
+	$(".post-body img").each(function(){
+		var src=$(this)[0].src;
+		var a = '<a href="' + src + '" data-fancybox="gallery">';
+		$(this).wrap(a);
+	})
+})
+</script>
+{% endblock scripts %}
+{% endblock body %}
+

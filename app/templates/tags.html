@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block head%}
+{{ super() }}
+<style type="text/css">
+#tag-cloud{
+	width:700px;
+	height:400px;
+	margin:30px auto;
+}
+</style>
+{% endblock %}
+{% block main %}
+<div id="tag-cloud">
+</div>
+{% endblock main %}
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static',filename='js/jquery.svg3dtagcloud.min.js', _external='True') }}"></script>
+<script>
+$(document).ready(function(){
+	var entries=[
+	{% for tag in tags %}
+	{ label: '{{ tag.name }}', url: '{{ url_for('.tag',name=tag.name)}}', target: '_top' },
+	{% endfor %}
+];
+var settings = {
+	entries: entries,
+	width:700,
+	height:600,
+	radius:'65%',
+	radiusMin: 75,
+	bgDraw: true,
+	bgColor: 'rgba(255,255,255,0)',
+	opacityOver: 1.00,
+	pacityOut: 0.05,
+	opacitySpeed: 5,
+	fov: 800,
+	speed: 0.5,
+	fontFamily: 'Roboto Slab, PingFang SC, Microsoft YaHei, sans-serif',
+	fontSize: '20',
+	fontColor: '#555',
+	fontWeight: 'normal',
+	fontStyle: 'normal',
+	fontStretch: 'normal',
+	fontToUpperCase: true
+};
+//var svg3DTagCloud = new SVG3DTagCloud( document.getElementById( 'holder'  ), settings );
+$('#tag-cloud').svg3DTagCloud( settings );
+});
+</script>
+{% endblock scripts %}
