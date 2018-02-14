@@ -2,12 +2,11 @@
 {% block head %}
 {{ super() }}
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+<link rel="shortcut icon" href="{{ url_for('static', filename='image/avatar.jpg') }}" type="image/x-icon">
 <link href={{ url_for('static', filename='css/editormd.min.css', _external=True) }} rel="stylesheet">
 <link href={{ url_for('static', filename='css/style.css', _external=True) }} rel="stylesheet">
 <link href={{ url_for('static', filename='css/font-awesome.min.css', _external=True) }} rel="stylesheet">
-
 {% endblock head %}
-{% block title %}MyBlog{% endblock %}
 {% block body %}
 {% block navbar%}
 <div class="box">
@@ -71,7 +70,7 @@
 	<div class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
 		<div class="sidebar-inner">
 			<div class="site-author motion-element">
-				<img class="site-author-image" src={{ url_for('static',filename='image/avatar.png', _external='True') }}>
+				<img class="site-author-image" src={{ url_for('static',filename='image/avatar.jpg', _external='True') }}>
 				<p class="site-author-name">Max</p>
 				<p class="site-description motion-element"></p>
 			</div>
